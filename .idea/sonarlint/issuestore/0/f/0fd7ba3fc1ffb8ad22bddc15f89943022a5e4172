@@ -1,0 +1,11 @@
+
+\squid:UnusedPrivateMethod°"/Remove this unused private "updatePost" method.(Ãå«ƒ8µÆªİ¬-
+Wsquid:UnusedPrivateMethodU"-Remove this unused private "getPosts" method.(¬ÄÌ øÿÿÿÿ
+Ysquid:UselessImportCheck"0Remove this unused import 'retrofit2.http.POST'.(Ä­×”øÿÿÿÿ
+^squid:S1192G"GDefine a constant instead of duplicating this literal "Text: " 4 times.(úúè
+Zsquid:UnusedPrivateMethod."0Remove this unused private "getComments" method.(ÍßÈ¦ûÿÿÿÿ
+esquid:S1192;"ODefine a constant instead of duplicating this literal "Code response " 5 times.(ÈÍO
+`squid:UnusedPrivateMethodƒ"3Remove this unused private "creategetPosts" method.(÷ô­É8à†¸Ú¬-
+Asquid:S1481„")Remove this unused "post" local variable.(‹–‰®
+hsquid:S1192q"JDefine a constant instead of duplicating this literal "User ID: " 3 times.(£ĞÆ8¯ÃÚ¬-
+ksquid:S1192r"HDefine a constant instead of duplicating this literal "Title: " 3 times.(ĞæÄ›úÿÿÿÿ8¯ÃÚ¬-

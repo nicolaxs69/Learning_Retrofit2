@@ -36,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         // getPosts();
         // getComments();
-        creategetPosts();
-
+        //creategetPosts();
+        //updatePost();
+        deletePost();
     }
+
+
 
     private void getComments() {
 
@@ -52,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Comment>> call, Response<List<Comment>> response) {
 
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     textView.setText("Code response " + response.code());
                     return;
                 }
 
                 List<Comment> comments = response.body();
 
-                for (Comment comment: comments){
+                for (Comment comment : comments) {
                     String content = "";
                     content += "ID: " + comment.getId() + "\n";
                     content += "Post ID: " + comment.getPostId() + "\n";
@@ -79,13 +82,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getPosts(){
+    private void getPosts() {
 
 
         Map<String, String> paramaters = new HashMap<>();
         paramaters.put("userId", "1");
         paramaters.put("_sort", "id");
-        paramaters.put("_order","desc" +"");
+        paramaters.put("_order", "desc" + "");
 
         // Option 1. Using @Query
         Call<List<Post>> call = jsonPLaceHolderApi.getPosts(paramaters);
@@ -97,14 +100,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     textView.setText("Code response " + response.code());
                     return;
                 }
 
                 List<Post> posts = response.body();
 
-                for (Post post: posts){
+                for (Post post : posts) {
                     String content = "";
                     content += "ID: " + post.getId() + "\n";
                     content += "User ID: " + post.getUserId() + "\n";
@@ -137,16 +140,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Option 3. Using @FieldMap form
         Map<String, String> fields = new HashMap<>();
-        fields.put("userId","25");
-        fields.put("title","New Title");
+        fields.put("userId", "25");
+        fields.put("title", "New Title");
 
-        Call <Post> call = jsonPLaceHolderApi.createPost(fields);
+        Call<Post> call = jsonPLaceHolderApi.createPost(fields);
 
         call.enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
 
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     textView.setText("Code response " + response.code());
                     return;
                 }
@@ -154,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 Post postResponse = response.body();
 
                 String content = "";
-                content += "Code: " + response.code()+ "\n";
+                content += "Code: " + response.code() + "\n";
                 content += "ID: " + postResponse.getId() + "\n";
                 content += "User ID: " + postResponse.getUserId() + "\n";
                 content += "Title: " + postResponse.getTitle() + "\n";
@@ -169,4 +172,60 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void updatePost() {
+        Post post = new Post(12, null, "New Text");
+
+        Call<Post> call = jsonPLaceHolderApi.patchPost(5, post);
+
+        call.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+
+                if (!response.isSuccessful()) {
+                    textView.setText("Code response " + response.code());
+                    return;
+                }
+
+                Post putResponse = response.body();
+
+                String content = "";
+                content += "Code: " + response.code() + "\n";
+                content += "ID: " + putResponse.getId() + "\n";
+                content += "User ID: " + putResponse.getUserId() + "\n";
+                content += "Title: " + putResponse.getTitle() + "\n";
+                content += "Text: " + putResponse.getText() + "\n\n";
+
+                textView.append(content);
+
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+                textView.setText(t.getMessage());
+
+            }
+        });
+
     }
+
+    private void deletePost() {
+
+        Call<Void> call = jsonPLaceHolderApi.deletePost(5);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                textView.setText("Code response " + response.code());
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                textView.setText(t.getMessage());
+            }
+        });
+
+
+    }
+
+}
